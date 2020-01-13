@@ -15,10 +15,9 @@ public class EndsWith {
      * @return result - валиден/не валиден постфикс
      */
     public static boolean endsWith(char[] word, char[] post) {
-        boolean result = false;
+        boolean result = true;
         for(int i = 0; i < post.length; i++) {
-            if (post[post.length - i - 1] == word[word.length - i - 1]) result = true;
-            else {
+            if (post[post.length - i - 1] != word[word.length - i - 1]) {
                 result = false;
                 break;
             }
