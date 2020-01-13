@@ -41,4 +41,21 @@ public class FindLoop {
         }
         return rst;
     }
+
+    /**
+     * Сортировка массива по возрастанию
+     * @param data - массив     *
+     * @return data - отсортированный массив
+     */
+    public static int[] sort(int[] data) {
+        int min, index, temp;
+        for(int i = 0; i < data.length; i++){
+            min = MinDiapason.findMin(data, i, data.length - 1);
+            index = FindLoop.indexOf(data, min, i, data.length - 1);
+            temp = data[i];
+            data[i] = min;
+            data[index] = temp;
+        }
+        return data;
+    }
 }
