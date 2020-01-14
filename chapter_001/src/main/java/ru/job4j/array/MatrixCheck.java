@@ -22,4 +22,20 @@ public class MatrixCheck {
         }
         return result;
     }
+    /**
+     * Проверка заполненности ряда матрицы по Х
+     * @param board - матрица
+     * @param column - столбец
+     * @return boolean - заполнен/незаполнен столбец
+     */
+    public static boolean monoVertical(char[][] board, int column) {
+        boolean result = true;
+        for (int i = 0; i < board.length; i++) {
+            if (board[i][column] != 'X') {
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
 }
