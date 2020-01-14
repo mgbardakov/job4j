@@ -51,4 +51,20 @@ public class MatrixCheck {
         }
         return rsl;
     }
+
+    /**
+     * Проверяет наличие выигрышгых комбинацй в сокобан
+     * @param board - матрица
+     * @return boolean - есть комбинация / нет комбинации
+     */
+    public static boolean isWin(char[][] board) {
+        boolean result = false;
+        for (int i = 0; i < board.length; i++) {
+            if (monoHorizontal(board, i) || monoVertical(board, i)) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
 }
