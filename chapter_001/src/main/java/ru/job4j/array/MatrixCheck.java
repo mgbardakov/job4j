@@ -40,9 +40,9 @@ public class MatrixCheck {
     }
 
     /**
-     * Заполняет матрицу символами 'X' по диагонали
+     * Заполняет массив символами из дмагонали матрицы
      * @param board - матрица
-     * @return boolean - заполнен/незаполнен столбец
+     * @return - заполненный массив
      */
     public static char[] extractDiagonal(char[][] board) {
         char[] rsl = new char[board.length];
