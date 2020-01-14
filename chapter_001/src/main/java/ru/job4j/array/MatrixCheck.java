@@ -38,4 +38,17 @@ public class MatrixCheck {
         }
         return result;
     }
+
+    /**
+     * Заполняет матрицу символами 'X' по диагонали
+     * @param board - матрица
+     * @return boolean - заполнен/незаполнен столбец
+     */
+    public static char[] extractDiagonal(char[][] board) {
+        char[] rsl = new char[board.length];
+        for (int i = 0; i < board.length; i++) {
+            rsl[i] = board[i][i];
+        }
+        return rsl;
+    }
 }
