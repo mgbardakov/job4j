@@ -1,0 +1,25 @@
+package ru.job4j.array;
+/**
+ * MatrixCheck класс для проверки однородности матрицы по Х
+ * @author Maxim Bardakov (mgbardakov@gmail.com)
+ * @since 14.01.2020
+ * @version 1.0
+ */
+public class MatrixCheck {
+    /**
+     * Проверка заполненности ряда матрицы по Х
+     * @param board - матрица
+     * @param row - ряд
+     * @return result - заполнен/незаполнен ряд
+     */
+    public static boolean monoHorizontal(char[][] board, int row) {
+        boolean result = true;
+        for (int i = 0; i < board[row].length; i++) {
+            if (board[row][i] != 'X') {
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+}
