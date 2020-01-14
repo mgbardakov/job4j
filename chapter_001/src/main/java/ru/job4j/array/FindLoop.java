@@ -32,7 +32,7 @@ public class FindLoop {
      * @return rst - индекс искомого элемента
      */
     public static int indexOf(int[] data, int el, int start, int finish) {
-        int rst = -1;// если элемента нет в массиве, то возвращаем -1.
+        int rst = -1; // если элемента нет в массиве, то возвращаем -1.
         for (int index = start; index <= finish; index++) {
             if (data[index] == el) {
                 rst = index;
@@ -49,7 +49,7 @@ public class FindLoop {
      */
     public static int[] sort(int[] data) {
         int min, index, temp;
-        for(int i = 0; i < data.length; i++){
+        for (int i = 0; i < data.length; i++) {
             min = MinDiapason.findMin(data, i, data.length - 1);
             index = FindLoop.indexOf(data, min, i, data.length - 1);
             temp = data[i];
