@@ -21,8 +21,7 @@ public class Defragment {
                     count++;
                 }
                 array[index] = array[count];
-                array[count] = null; // переместить первую не null ячейку
-                // Здесь нужен цикл while
+                array[count] = null;
             }
             System.out.print(array[index] + " ");
         }
