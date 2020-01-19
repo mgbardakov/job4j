@@ -11,18 +11,18 @@ public class Jukebox {
      * @param position - значение типа int
      */
     public void music(int position) {
-        String gena =  "Пусть бегут неуклюже"
-                + "\n" + "Пешеходы по лужам,"
-                + "\n" + "А вода по асфальту рекой."
-                + "\n" + "И неясно прохожим,"
-                + "\n" + "В этот день непогожий,"
-                + "\n" + "Почему я весёлый такой.";
-        String hrusha = "Спят усталые игрушки, книжки спят."
-                + "\n" + "Одеяла и подушки ждут ребят."
-                + "\n" + "Даже сказка спать ложится,"
-                + "\n" + "Чтобы ночью нам присниться."
-                + "\n" + "Ты ей пожелай:"
-                + "\n" +   "Баю-бай.";
+        String gena =                      "Пусть бегут неуклюже"
+                + System.lineSeparator() + "Пешеходы по лужам,"
+                + System.lineSeparator() + "А вода по асфальту рекой."
+                + System.lineSeparator() + "И неясно прохожим,"
+                + System.lineSeparator() + "В этот день непогожий,"
+                + System.lineSeparator() + "Почему я весёлый такой.";
+        String hrusha =                    "Спят усталые игрушки, книжки спят."
+                + System.lineSeparator() + "Одеяла и подушки ждут ребят."
+                + System.lineSeparator() + "Даже сказка спать ложится,"
+                + System.lineSeparator() + "Чтобы ночью нам присниться."
+                + System.lineSeparator() + "Ты ей пожелай:"
+                + System.lineSeparator() +   "Баю-бай.";
         String unknown = "Песня не найдена";
             if (position == 1) {
             System.out.println(gena);
