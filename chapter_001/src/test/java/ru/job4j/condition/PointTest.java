@@ -31,4 +31,22 @@ public class PointTest {
         Assert.assertEquals(expected, out, 0.01);
     }
 
+    @Test
+    public void distance3D1() {
+        Point first = new Point(2, 3, 3);
+        Point second = new Point(12, -5, 11);
+        double expected = 15.1;
+        double out = first.distance3d(second);
+        Assert.assertEquals(expected, out, 0.01);
+    }
+
+    @Test
+    public void distance3D2() {
+        Point first = new Point(4, 7, 10);
+        Point second = new Point(12, -5, 6);
+        double expected = 14.97;
+        double out = first.distance3d(second);
+        Assert.assertEquals(expected, out, 0.01);
+    }
+
 }
