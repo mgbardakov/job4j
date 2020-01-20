@@ -20,4 +20,14 @@ public class MaxTest {
         int result = Max.max(3, 3);
         assertThat(result, is(3));
     }
+    @Test
+    public void whenTree() {
+        int result = Max.max(3, 3, 5);
+        assertThat(result, is(5));
+    }
+    @Test
+    public void whenFour() {
+        int result = Max.max(3, 3, 5, 15);
+        assertThat(result, is(15));
+    }
 }
