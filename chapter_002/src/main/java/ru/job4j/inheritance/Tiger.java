@@ -1,4 +1,4 @@
-package inheritance;
+package ru.job4j.inheritance;
 
 public class Tiger extends Predator {
     public Tiger() {
