@@ -5,11 +5,11 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class ProgrammerTest {
-    String expectedName = "Tony";
-    String expectedSurname = "Soprano";
-    String expectedEdu = "Prinston";
-    String expectedBirthday = "21.11.1993";
-    String expectedEnt = "high";
+    private String expectedName = "Tony";
+    private String expectedSurname = "Soprano";
+    private String expectedEdu = "Prinston";
+    private String expectedBirthday = "21.11.1993";
+    private String expectedEnt = "high";
 
     Programmer tony = new Programmer(expectedName, expectedSurname, expectedEdu, expectedBirthday, expectedEnt);
 

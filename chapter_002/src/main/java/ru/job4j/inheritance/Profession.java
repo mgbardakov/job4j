@@ -4,13 +4,13 @@ import java.util.Date;
 
 public class Profession {
 
-    String name;
+    private String name;
 
-    String surname;
+    private String surname;
 
-    String education;
+    private String education;
 
-    String birthday;
+    private String birthday;
 
     public Profession(String name, String surname, String education, String birthday) {
         this.name = name;

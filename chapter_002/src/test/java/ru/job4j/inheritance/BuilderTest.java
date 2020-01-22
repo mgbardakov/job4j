@@ -5,10 +5,10 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class BuilderTest {
-    String expectedName = "Vito";
-    String expectedSurname = "Corleone";
-    String expectedEdu = "Yale";
-    String expectedBirthday = "13.09.1984";
+   private String expectedName = "Vito";
+   private String expectedSurname = "Corleone";
+   private String expectedEdu = "Yale";
+   private String expectedBirthday = "13.09.1984";
 
     Builder vito = new Builder(expectedName, expectedSurname, expectedEdu, expectedBirthday);
 

@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Dentist extends Doctor {
 
-    String dentistChair;
+    private String dentistChair;
 
     public Dentist(String name, String surname, String education, String birthday, String dentistChair) {
         super(name, surname, education, birthday);

@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Doctor extends Profession {
 
-    boolean license;
+    private boolean license;
 
     public Doctor(String name, String surname, String education, String birthday) {
         super(name, surname, education, birthday);

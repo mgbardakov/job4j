@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Engineer extends Profession {
 
-    boolean knowsMath;
+    private boolean knowsMath;
 
     public Engineer(String name, String surname, String education, String birthday) {
         super(name, surname, education, birthday);

@@ -4,11 +4,11 @@ import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 public class DentistTest {
-    String expectedName = "Bill";
-    String expectedSurname = "Burr";
-    String expectedEdu = "Stanford";
-    String expectedBirthday = "14.08.1974";
-    String expectedChair = "Dentist chair";
+    private String expectedName = "Bill";
+    private String expectedSurname = "Burr";
+    private String expectedEdu = "Stanford";
+    private String expectedBirthday = "14.08.1974";
+    private String expectedChair = "Dentist chair";
 
     Dentist bill = new Dentist(expectedName, expectedSurname, expectedEdu, expectedBirthday, expectedChair);
 
