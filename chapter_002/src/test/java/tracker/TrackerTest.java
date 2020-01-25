@@ -73,4 +73,31 @@ public class TrackerTest {
         tracker.replace(id, bugWithDesc);
         assertThat(tracker.findById(id).getName(), is("Bug with description"));
     }
+
+    @Test
+    public void whenDelete() {
+        Tracker tracker = new Tracker();
+        Item bug = new Item("Bug");
+        tracker.add(bug);
+        String id = bug.getId();
+        tracker.delete(id);
+        assertThat(tracker.findById(id), is(nullValue()));
+    }
+
+    @Test
+    public void whenNoDeleteItem() {
+        Tracker tracker = new Tracker();
+        Item bug = new Item("Bug");
+        tracker.add(bug);
+        String id = "123456789";
+        assertThat(tracker.delete(id), is(false));
+    }
+
+    @Test
+    public void whenNoReplaceItem() {
+        Tracker tracker = new Tracker();
+        String id = "123456789";
+        Item bugWithDesc = new Item("Bug with description");
+        assertThat(tracker.replace(id, bugWithDesc), is(false));
+    }
 }
