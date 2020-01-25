@@ -95,6 +95,9 @@ public class Tracker {
      * @param id - ID
      */
     public void delete(String id) {
+        if (indexOf(id) == -1) {
+            return;
+        }
         System.arraycopy(items, indexOf(id) + 1, items, indexOf(id), position - indexOf(id));
         items[position] = null;
         position--;

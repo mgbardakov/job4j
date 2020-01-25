@@ -83,4 +83,14 @@ public class TrackerTest {
         tracker.delete(id);
         assertThat(tracker.findById(id), is(nullValue()));
     }
+
+    @Test
+    public void whenNoDeleteItem() {
+        Tracker tracker = new Tracker();
+        Item bug = new Item("Bug");
+        tracker.add(bug);
+        String id = "123456789";
+        tracker.delete(id);
+        assertThat(tracker.findById(id), is(nullValue()));
+    }
 }
