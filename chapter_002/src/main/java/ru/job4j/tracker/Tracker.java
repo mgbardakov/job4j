@@ -85,23 +85,27 @@ public class Tracker {
      * @param id - ID
      * @param  item - объект на который производится замена
      */
-    public void replace(String id, Item item) {
+    public boolean replace(String id, Item item) {
+        if (indexOf(id) == -1) {
+            return false;
+        }
         item.setId(id);
         items[indexOf(id)] = item;
+        return true;
     }
 
     /**
      * Метод удаляет объект
      * @param id - ID
      */
-    public void delete(String id) {
+    public boolean delete(String id) {
         if (indexOf(id) == -1) {
-            return;
+            return false;
         }
         System.arraycopy(items, indexOf(id) + 1, items, indexOf(id), position - indexOf(id));
         items[position] = null;
         position--;
-
+        return true;
     }
     /**
      * Метод возвращает индекс объекта по ID
