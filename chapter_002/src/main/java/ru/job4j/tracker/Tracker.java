@@ -74,6 +74,9 @@ public class Tracker {
      * @return - найденный объект или null, если объект не найден
      */
     public Item findById(String id) {
+        if (indexOf(id) == -1) {
+            return null;
+        }
         return items[indexOf(id)];
     }
 
@@ -85,6 +88,17 @@ public class Tracker {
     public void replace(String id, Item item) {
         item.setId(id);
         items[indexOf(id)] = item;
+    }
+
+    /**
+     * Метод удаляет объект
+     * @param id - ID
+     */
+    public void delete(String id) {
+        System.arraycopy(items, indexOf(id) + 1, items, indexOf(id), position - indexOf(id));
+        items[position] = null;
+        position--;
+
     }
     /**
      * Метод возвращает индекс объекта по ID
