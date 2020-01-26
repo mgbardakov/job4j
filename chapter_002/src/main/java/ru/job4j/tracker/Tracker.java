@@ -74,10 +74,11 @@ public class Tracker {
      * @return - найденный объект или null, если объект не найден
      */
     public Item findById(String id) {
-        if (indexOf(id) == -1) {
+        int index = indexOf(id);
+        if (index == -1) {
             return null;
         }
-        return items[indexOf(id)];
+        return items[index];
     }
 
     /**
@@ -86,11 +87,12 @@ public class Tracker {
      * @param  item - объект на который производится замена
      */
     public boolean replace(String id, Item item) {
-        if (indexOf(id) == -1) {
+        int index = indexOf(id);
+        if (index == -1) {
             return false;
         }
         item.setId(id);
-        items[indexOf(id)] = item;
+        items[index] = item;
         return true;
     }
 
@@ -99,10 +101,11 @@ public class Tracker {
      * @param id - ID
      */
     public boolean delete(String id) {
-        if (indexOf(id) == -1) {
+        int index = indexOf(id);
+        if (index == -1) {
             return false;
         }
-        System.arraycopy(items, indexOf(id) + 1, items, indexOf(id), position - indexOf(id));
+        System.arraycopy(items, index + 1, items, index, position - index);
         items[position] = null;
         position--;
         return true;
