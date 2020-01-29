@@ -4,18 +4,16 @@ import java.util.Scanner;
 
 public class StartUI {
 
-    public void init(Scanner scanner, Tracker tracker) {
+    public void init(Input input, Tracker tracker) {
         boolean run = true;
         while (run) {
             this.showMenu();
-            System.out.print("Select: ");
-            int select = Integer.parseInt(scanner.nextLine());
+            int select = input.askInt("Select: ");
             System.out.println();
             switch (select) {
                 case 0:
                     System.out.println("=== Create a new Item ====");
-                    System.out.print("Enter name: ");
-                    String name = scanner.nextLine();
+                    String name = input.askStr("Enter name: ");
                     Item item = new Item(name);
                     tracker.add(item);
                     System.out.println();
@@ -29,10 +27,8 @@ public class StartUI {
                     System.out.println();
                     break;
                 case 2:
-                    System.out.print("Enter id: ");
-                    String editId = scanner.nextLine();
-                    System.out.print("Enter new name: ");
-                    String newName = scanner.nextLine();
+                    String editId = input.askStr("Enter id: ");
+                    String newName = input.askStr("Enter new name: ");
                     if (tracker.replace(editId, new Item(newName))) {
                         System.out.println("Editing completed");
                     } else {
@@ -41,8 +37,7 @@ public class StartUI {
                     System.out.println();
                     break;
                 case 3:
-                    System.out.print("Enter id: ");
-                    String delId = scanner.nextLine();
+                    String delId = input.askStr("Enter id: ");
                     if (tracker.delete(delId)) {
                         System.out.println("Item deleted");
                     } else {
@@ -51,14 +46,12 @@ public class StartUI {
                     System.out.println();
                     break;
                 case 4:
-                    System.out.print("Enter id: ");
-                    String findId = scanner.nextLine();
+                    String findId = input.askStr("Enter id: ");
                     System.out.println(tracker.findById(findId));
                     System.out.println();
                     break;
                 case 5:
-                    System.out.print("Enter name: ");
-                    String findName = scanner.nextLine();
+                    String findName = input.askStr("Enter name: ");
                     Item[] similarNames = tracker.findByName(findName);
                     for (Item i : similarNames) {
                         System.out.println(i);
@@ -90,9 +83,9 @@ public class StartUI {
 
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Input input = new ConsoleInput();
         Tracker tracker = new Tracker();
-        new StartUI().init(scanner, tracker);
+        new StartUI().init(input, tracker);
     }
 }
         //0. Add new Item
