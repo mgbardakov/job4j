@@ -1,8 +1,5 @@
-package tracker;
+package ru.job4j.tracker;
 import org.junit.Test;
-import ru.job4j.inheritance.Builder;
-import ru.job4j.tracker.Item;
-import ru.job4j.tracker.Tracker;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;

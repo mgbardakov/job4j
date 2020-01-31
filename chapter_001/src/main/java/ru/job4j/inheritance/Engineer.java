@@ -1,7 +1,5 @@
 package ru.job4j.inheritance;
 
-import java.util.Date;
-
 public class Engineer extends Profession {
 
     private boolean knowsMath;
