@@ -53,7 +53,7 @@ public class StartUI {
         for (Item i : similarNames) {
             System.out.println(i);
         }
-        System.out.println(0);
+        System.out.println();
     }
 
     public void init(Input input, Tracker tracker) {
