@@ -13,7 +13,6 @@ public class FindByNameAction implements UserAction {
         for (Item i : similarNames) {
             System.out.println(i);
         }
-        System.out.println();
         return true;
     }
 }

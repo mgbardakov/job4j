@@ -12,7 +12,6 @@ public class ShowAllAction implements UserAction {
         for (Item it : itemsToShow) {
             System.out.println(it);
         }
-        System.out.println();
         return true;
     }
 }
