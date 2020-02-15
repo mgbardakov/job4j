@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.List;
 import java.util.StringJoiner;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -30,23 +31,23 @@ public class OutputActionTest {
 
     @Test
     public void whenShowAll() {
-        Item[] items = tracker.findAll();
+        List<Item> items = tracker.findAll();
         new ShowAllAction().execute(input, tracker);
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
-                .add(items[0].toString())
-                .add(items[1].toString())
-                .add(items[2].toString())
+                .add(items.get(0).toString())
+                .add(items.get(1).toString())
+                .add(items.get(2).toString())
                 .toString();
         assertThat(new String(bos.toByteArray()), is(expect));
     }
 
     @Test
     public void whenFindByName() {
-        Item[] items = tracker.findByName("Pan");
+        List<Item> items = tracker.findByName("Pan");
         new FindByNameAction().execute(input, tracker);
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
-                .add(items[0].toString())
-                .add(items[1].toString())
+                .add(items.get(0).toString())
+                .add(items.get(1).toString())
                 .toString();
         assertThat(new String(bos.toByteArray()), is(expect));
     }

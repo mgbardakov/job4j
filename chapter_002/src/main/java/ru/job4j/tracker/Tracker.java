@@ -1,19 +1,13 @@
 package ru.job4j.tracker;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Random;
+import java.util.*;
 
 public class Tracker {
     /**
      * Массив для хранения заявок.
      */
-    private final Item[] items = new Item[100];
+    private final List<Item> items = new ArrayList<>();
 
-    /**
-     * Указатель ячейки для новой заявки.
-     */
-    private int position = 0;
 
     /**
      * Метод добавления заявки в хранилище
@@ -21,8 +15,8 @@ public class Tracker {
      * @param item новая заявка
      */
     public Item add(Item item) {
-        item.setId(this.generateId());
-        items[this.position++] = item;
+        item.setId(generateId());
+        items.add(item);
         return item;
     }
 
@@ -41,11 +35,8 @@ public class Tracker {
      * Метод возвращает массив всех объектов
      * @return - массив объектов
      */
-    public Item[] findAll() {
-        if (position == 0) {
-            return null;
-        }
-        return Arrays.copyOf(items, position);
+    public List<Item> findAll() {
+        return items;
     }
 
     /**
@@ -53,18 +44,17 @@ public class Tracker {
      * @param key - имя
      * @return - массив объектов
      */
-    public Item[] findByName(String key) {
-        Item[] result = new Item[position];
-        int size = 0;
-        for (int index = 0; index < position; index++) {
-            if (items[index].getName().equals(key)) {
-                result[size++] = items[index];
+    public List<Item> findByName(String key) {
+        List<Item> result = new ArrayList<>();
+        for (Item item : items) {
+            if (item.getName().equals(key)) {
+                result.add(item);
             }
         }
-        if (size == 0) {
+        if (result.size() == 0) {
             return null;
         }
-        return Arrays.copyOf(result, size);
+        return result;
     }
 
 
@@ -74,11 +64,14 @@ public class Tracker {
      * @return - найденный объект или null, если объект не найден
      */
     public Item findById(String id) {
-        int index = indexOf(id);
-        if (index == -1) {
-            return null;
+        Item result = null;
+        for (Item item : items) {
+            if (item.getId().equals(id)) {
+                result = item;
+                break;
+            }
         }
-        return items[index];
+        return result;
     }
 
     /**
@@ -92,7 +85,7 @@ public class Tracker {
             return false;
         }
         item.setId(id);
-        items[index] = item;
+        items.set(index, item);
         return true;
     }
 
@@ -105,9 +98,7 @@ public class Tracker {
         if (index == -1) {
             return false;
         }
-        System.arraycopy(items, index + 1, items, index, position - index);
-        items[position] = null;
-        position--;
+        items.remove(index);
         return true;
     }
     /**
@@ -117,8 +108,8 @@ public class Tracker {
      */
     private int indexOf(String id) {
         int rsl = -1;
-        for (int index = 0; index < position; index++) {
-            if (items[index].getId().equals(id)) {
+        for (int index = 0; index < items.size(); index++) {
+            if (items.get(index).getId().equals(id)) {
                 rsl = index;
                 break;
             }

@@ -12,7 +12,7 @@ public class CreateActionTest {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"Bug"});
         new CreateAction().execute(input, tracker);
-        Item result = tracker.findAll()[0];
+        Item result = tracker.findAll().get(0);
         Item expected = new Item("Bug");
         assertThat(result.getName(), is(expected.getName()));
     }

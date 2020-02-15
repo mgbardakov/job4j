@@ -3,6 +3,9 @@ import org.junit.Test;
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -31,7 +34,11 @@ public class TrackerTest {
         Item pan = testTracker.add(new Item("Сковорода"));
         Item fork = testTracker.add(new Item("Вилка"));
         Item mug = testTracker.add(new Item("Кружка"));
-        assertThat(testTracker.findAll(), is(new Item[]{pan, fork, mug}));
+        List<Item> result = new ArrayList<>();
+        result.add(pan);
+        result.add(fork);
+        result.add(mug);
+        assertThat(testTracker.findAll(), is(result));
     }
 
     @Test
@@ -41,7 +48,10 @@ public class TrackerTest {
         Item pan = testTracker.add(new Item("Сковорода"));
         Item fork = testTracker.add(new Item("Вилка"));
         Item mug = testTracker.add(new Item("Кружка"));
-        assertThat(testTracker.findByName("Кружка"), is(new Item[] {mug0, mug}));
+        List<Item> result = new ArrayList<>();
+        result.add(mug0);
+        result.add(mug);
+        assertThat(testTracker.findByName("Кружка"), is(result));
     }
 
     @Test
