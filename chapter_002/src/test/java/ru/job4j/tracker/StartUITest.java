@@ -17,7 +17,7 @@ public class StartUITest {
         StubAction stubAction = new StubAction();
         List<UserAction> list = new ArrayList<>();
         list.add(stubAction);
-        new StartUI().init(input, new Tracker(), list);
+        new StartUI(input, new Tracker(), System.out::println, list).init();
         assertThat(stubAction.isCall(), is(true));
     }
 
@@ -25,16 +25,15 @@ public class StartUITest {
     public void whenCheckInitOutput() {
         Input input = new StubInput(new String[]{"0"});
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        PrintStream def = System.out;
-        System.setOut(new PrintStream(out));
         List<UserAction> list = new ArrayList<>();
         list.add(new StubAction());
-        new StartUI().init(input, new Tracker(), list);
+        PrintStream print = new PrintStream(out);
+        new StartUI(input, new Tracker(), print::println, list).init();
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add("Menu.")
                 .add("0. StubAction")
                 .toString();
         assertThat(new String(out.toByteArray()), is(expect));
-        System.setOut(def);
+
     }
 }
