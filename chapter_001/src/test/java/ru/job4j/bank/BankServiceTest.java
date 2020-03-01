@@ -34,4 +34,9 @@ public class BankServiceTest {
         bank.transferMoney(user.getPassport(), "5546", user.getPassport(), "113", 150);
         assertThat(bank.findByRequisite("3434", "113").getBalance(), is(200.0));
     }
+
+    @Test
+    public void findByRequisiteIfUserNotFound() {
+        assertNull(new BankService().findByRequisite("Pavel Holopov", "1125"));
+    }
 }
