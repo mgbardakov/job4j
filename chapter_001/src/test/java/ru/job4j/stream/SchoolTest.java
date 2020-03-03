@@ -49,4 +49,17 @@ public class SchoolTest {
 
     }
 
+    @Test
+    public void studentListToElite() {
+        List<Student> arg = new ArrayList<>(list);
+        arg.add(2, null);
+        arg.add(3, null);
+        List<Student> expected = Arrays.asList(new Student("Lee", 91),
+                                               new Student("Petrov", 80),
+                                               new Student("Abramov", 75));
+        List<Student> result = new School().levelOf(arg, 70);
+        assertThat(result, is(expected));
+
+    }
+
 }
