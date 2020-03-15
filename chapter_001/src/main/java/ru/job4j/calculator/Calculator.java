@@ -1,5 +1,9 @@
 package ru.job4j.calculator;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+
 /**
  * Calculator класс для выполнения арифметических вычислений
  * @author Maxim Bardakov (mgbardakov@gmail.com)
@@ -8,14 +12,32 @@ package ru.job4j.calculator;
  */
 public class Calculator {
 
+    private List<CalculateAction> actionList;
+
+    public Calculator(Consumer<String> con) {
+        this.actionList = new ArrayList<>();
+        actionList.add(new AddAction(con));
+        actionList.add(new SubtractAction(con));
+        actionList.add(new MultiplyAction(con));
+        actionList.add(new DivideAction(con));
+        actionList.add(new ExitAction());
+    }
+
+    public Calculator() {
+        this(System.out::println);
+    }
+
+    public List<CalculateAction> getActionList() {
+        return actionList;
+    }
+
     /**
      * Сложение
      * @param first первое слагаемое
      * @param second второе слагаемое
      */
-    public static void add(double first, double second) {
-        double result =  first + second;
-        System.out.println(first + " + " + second + " = " + result);
+    public double add(double first, double second) {
+        return first + second;
     }
 
     /**
@@ -23,9 +45,8 @@ public class Calculator {
      * @param first делимое
      * @param second делитель
      */
-    public static void div(double first, double second) {
-        double result =  first / second;
-        System.out.println(first + " / " + second + " = " + result);
+    public double div(double first, double second) {
+        return first / second;
     }
 
     /**
@@ -33,9 +54,8 @@ public class Calculator {
      * @param first первый множитель
      * @param second второй множитель
      */
-    public static void multiply(double first, double second) {
-        double result =  first * second;
-        System.out.println(first + " * " + second + " = " + result);
+    public double multiply(double first, double second) {
+        return first * second;
     }
 
     /**
@@ -43,19 +63,8 @@ public class Calculator {
      * @param first уменьшаемое
      * @param second вычитаемое
      */
-    public static void subtract(double first, double second) {
-        double result =  first - second;
-        System.out.println(first + " - " + second + " = " + result);
+    public double subtract(double first, double second) {
+        return first - second;
     }
 
-    /**
-     * Умножение
-     * @param args - args
-     */
-    public static void main(String[] args) {
-        add(1, 1);
-        div(4, 2);
-        multiply(2, 1);
-        subtract(10, 5);
-    }
 }
