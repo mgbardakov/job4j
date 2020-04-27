@@ -8,8 +8,11 @@ import java.util.List;
 
 public class Search {
     public static void main(String[] args) throws IOException {
-        Path start = Paths.get("./junior/data");
-        List<String> filesToShow = search(start, "properties");
+        if (args.length < 2) {
+            throw  new IllegalStateException("Root folder and/or extension are null");
+        }
+        Path start = Paths.get(args[0]);
+        List<String> filesToShow = search(start, args[1]);
         filesToShow.forEach(System.out::println);
     }
     public static List<String> search(Path root, String ext) throws IOException {
