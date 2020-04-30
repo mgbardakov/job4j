@@ -21,15 +21,10 @@ public class AnalyzeTest {
         File target = folder.newFile("target.txt");
         try (PrintWriter out = new PrintWriter(source)) {
             out.println("200 10:56:01" + System.lineSeparator()
-                    + System.lineSeparator()
                     + "500 10:57:01" + System.lineSeparator()
-                    + System.lineSeparator()
                     + "400 10:58:01" + System.lineSeparator()
-                    + System.lineSeparator()
                     + "200 10:59:01" + System.lineSeparator()
-                    + System.lineSeparator()
                     + "500 11:01:02" + System.lineSeparator()
-                    + System.lineSeparator()
                     + "200 11:02:02");
         }
         new Analyze().unavailable(source.getAbsolutePath(), target.getAbsolutePath());
@@ -47,15 +42,10 @@ public class AnalyzeTest {
         File target = folder.newFile("target.txt");
         try (PrintWriter out = new PrintWriter(source)) {
             out.println("500 10:56:01" + System.lineSeparator()
-                    + System.lineSeparator()
                     + "500 10:57:01" + System.lineSeparator()
-                    + System.lineSeparator()
                     + "400 10:58:01" + System.lineSeparator()
-                    + System.lineSeparator()
                     + "200 10:59:01" + System.lineSeparator()
-                    + System.lineSeparator()
                     + "300 11:01:02" + System.lineSeparator()
-                    + System.lineSeparator()
                     + "200 11:02:02");
         }
         new Analyze().unavailable(source.getAbsolutePath(), target.getAbsolutePath());
@@ -72,15 +62,10 @@ public class AnalyzeTest {
         File target = folder.newFile("target.txt");
         try (PrintWriter out = new PrintWriter(source)) {
             out.println("300 10:56:01" + System.lineSeparator()
-                    + System.lineSeparator()
                     + "500 10:57:01" + System.lineSeparator()
-                    + System.lineSeparator()
                     + "400 10:58:01" + System.lineSeparator()
-                    + System.lineSeparator()
                     + "200 10:59:01" + System.lineSeparator()
-                    + System.lineSeparator()
                     + "500 11:01:02" + System.lineSeparator()
-                    + System.lineSeparator()
                     + "400 11:02:02");
         }
         new Analyze().unavailable(source.getAbsolutePath(), target.getAbsolutePath());
