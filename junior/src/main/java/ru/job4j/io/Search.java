@@ -20,4 +20,9 @@ public class Search {
         Files.walkFileTree(root, visitor);
         return visitor.getFiles();
     }
+    public static List<String> searchNoExt(Path root, String ext) throws IOException {
+        FileSearcher visitor = new FileSearcher(x -> !x.endsWith(String.format(".%s", ext)));
+        Files.walkFileTree(root, visitor);
+        return visitor.getFiles();
+    }
 }
