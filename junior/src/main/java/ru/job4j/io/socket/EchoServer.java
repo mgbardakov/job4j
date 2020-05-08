@@ -10,7 +10,8 @@ import java.util.regex.Pattern;
  * @since 06.05.2020
  */
 public class EchoServer {
-    public static final String END = "Bye";
+    public static final String END = "Exit";
+    public static final String HELLO = "Hello";
     public static void main(String[] args) throws IOException {
         try (ServerSocket server = new ServerSocket(9000)) {
             var run = true;
@@ -20,15 +21,21 @@ public class EchoServer {
                 try (OutputStream out = socket.getOutputStream();
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
-                    String str = in.readLine();
-                    if (END.equals(parseMessage(str, delimiter))) {
-                        run = false;
+                    var str = in.readLine();
+                    var message = parseMessage(str, delimiter);
+                    out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                    switch (message) {
+                        case END : run = false;
+                            break;
+                        case HELLO : out.write("Hello".getBytes());
+                            break;
+                        default : out.write(message.getBytes());
+                            break;
                     }
                     while (!(str.isEmpty())) {
                         System.out.println(str);
                         str = in.readLine();
                     }
-                    out.write("HTTP/1.1 200 OK\r\n\\".getBytes());
                 }
             }
         }
