@@ -87,7 +87,7 @@ public class SimpleArray<T> implements Iterable<T> {
                 return pointer < size;
             }
 
-            @Override
+            @Override @SuppressWarnings("unchecked")
             public T next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException("No more elements");
