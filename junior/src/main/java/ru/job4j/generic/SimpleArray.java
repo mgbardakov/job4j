@@ -50,6 +50,7 @@ public class SimpleArray<T> implements Iterable<T> {
      * @param index - index of the cell
      * @return - element
      */
+    @SuppressWarnings("unchecked")
      public T get(int index) {
         Objects.checkIndex(index, size);
          return (T) array[index];
