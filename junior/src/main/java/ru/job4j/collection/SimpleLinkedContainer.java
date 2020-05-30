@@ -23,13 +23,7 @@ public class SimpleLinkedContainer<T> implements Iterable<T> {
     }
 
     public T get(int index) {
-        Objects.checkIndex(index, size);
-        Iterator<T> it = index < size / 2 ? iterator() : backwardsIterator();
-        int count = index < size / 2 ? index : size - index - 1;
-        for (int i = 0; i < count; i++) {
-            it.next();
-        }
-        return it.next();
+        return findNodeByIndex(index).value;
     }
 
     public void add(T model) {
@@ -37,42 +31,67 @@ public class SimpleLinkedContainer<T> implements Iterable<T> {
             head = new Node<>(model, null, null);
             tail = head;
         } else {
-            tail = new Node<>(model, null, tail);
+            tail.next = new Node<>(model, null, tail);
+            tail = tail.next;
         }
         size++;
         modCount++;
     }
 
+    public T delete(int index) {
+        Node<T> removingNode = findNodeByIndex(index);
+        if (removingNode.previous == null) {
+            head = head.next;
+        } else if (removingNode.next == null) {
+            tail = tail.previous;
+        } else {
+            removingNode.previous.next = removingNode.next;
+            removingNode.next.previous = removingNode.previous;
+        }
+        size--;
+        return removingNode.value;
+    }
+
+    public int size() {
+        return this.size;
+    }
+
+    private Node<T> findNodeByIndex(int index) {
+        Objects.checkIndex(index, size);
+        Iterator<Node<T>> it = index < size / 2 ? nodeIterator(true) : nodeIterator(false);
+        int count = index < size / 2 ? index : size - index - 1;
+        for (int i = 0; i < count; i++) {
+            it.next();
+        }
+        return it.next();
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new Iterator<>() {
-            private final int localModCount = modCount;
-            private Node<T> current = head;
+            private final Iterator<Node<T>> nodeIterator = nodeIterator(true);
 
             @Override
             public boolean hasNext() {
-                return current != null;
+                return nodeIterator.hasNext();
             }
 
             @Override
             public T next() {
-                if (!hasNext()) {
-                    throw new NoSuchElementException("No more elements");
-                }
-                if (localModCount != modCount) {
-                    throw new ConcurrentModificationException();
-                }
-                var rsl = current.value;
-                current = current.next;
-                return rsl;
+                return nodeIterator.next().value;
             }
         };
     }
 
-    public Iterator<T> backwardsIterator() {
+    /**
+     * gets iterator for nodes
+     * @param forward - true - forward iterator false - backwards iterator
+     * @return iterator for nodes
+     */
+    private Iterator<Node<T>> nodeIterator(boolean forward) {
         return new Iterator<>() {
             private final int localModCount = modCount;
-            private Node<T> current = tail;
+            private Node<T> current = forward ? head : tail;
 
             @Override
             public boolean hasNext() {
@@ -80,19 +99,21 @@ public class SimpleLinkedContainer<T> implements Iterable<T> {
             }
 
             @Override
-            public T next() {
-                if (localModCount != modCount) {
-                    throw new ConcurrentModificationException();
-                }
+            public Node<T> next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException("No more elements");
                 }
-                var rsl = current.value;
-                current = current.previous;
+                if (localModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
+                var rsl = current;
+                current = forward ? current.next : current.previous;
                 return rsl;
             }
         };
+
     }
+
     private static class Node<T> {
         T value;
         Node<T> next;

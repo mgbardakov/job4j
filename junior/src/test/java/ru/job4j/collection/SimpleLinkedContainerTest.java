@@ -53,4 +53,35 @@ public class SimpleLinkedContainerTest {
         array.add("second");
         it.next();
     }
+
+    @Test
+    public void whenDeleteFirst() {
+        SimpleLinkedContainer<String> array = new SimpleLinkedContainer<>();
+        array.add("first");
+        array.add("second");
+        assertThat(array.delete(0), is("first"));
+        assertThat(array.get(0), is("second"));
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void whenDeleteLast() {
+        SimpleLinkedContainer<String> array = new SimpleLinkedContainer<>();
+        array.add("first");
+        array.add("second");
+        array.add("third");
+        assertThat(array.delete(2), is("third"));
+        array.get(2);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void whenDeleteMiddle() {
+        SimpleLinkedContainer<String> array = new SimpleLinkedContainer<>();
+        array.add("first");
+        array.add("second");
+        array.add("third");
+        assertThat(array.delete(1), is("second"));
+        assertThat(array.get(0), is("first"));
+        assertThat(array.get(1), is("third"));
+        array.get(2);
+    }
 }
