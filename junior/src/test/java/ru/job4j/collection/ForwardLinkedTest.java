@@ -11,7 +11,7 @@ public class ForwardLinkedTest {
 
     @Test
     public void whenAddThenIter() {
-        ForwardLinked<Integer> linked = new ForwardLinked<>();
+        ForwardLinked<Integer> linked = new ForwardLinked<Integer>();
         linked.add(1);
         linked.add(2);
         Iterator<Integer> it = linked.iterator();
@@ -21,7 +21,7 @@ public class ForwardLinkedTest {
 
     @Test
     public void whenAddAndRevertThenIter() {
-        ForwardLinked<Integer> linked = new ForwardLinked<>();
+        ForwardLinked<Integer> linked = new ForwardLinked<Integer>();
         linked.add(1);
         linked.add(2);
         linked.revert();
@@ -32,13 +32,13 @@ public class ForwardLinkedTest {
 
     @Test(expected = UnsupportedOperationException.class)
     public void whenRevertEmptyList() {
-        ForwardLinked<Integer> linked = new ForwardLinked<>();
+        ForwardLinked<Integer> linked = new ForwardLinked<Integer>();
         linked.revert();
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void whenRevertListWithOneElement() {
-        ForwardLinked<Integer> linked = new ForwardLinked<>();
+        ForwardLinked<Integer> linked = new ForwardLinked<Integer>();
         linked.add(1);
         linked.revert();
     }

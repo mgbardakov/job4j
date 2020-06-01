@@ -39,13 +39,13 @@ public class ForwardLinked<T> implements Iterable<T> {
             }
 
             @Override
-            public T next() {
+            public Node<T> next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                T value = node.value;
+                var rsl = node;
                 node = node.next;
-                return value;
+                return rsl;
             }
         };
     }
