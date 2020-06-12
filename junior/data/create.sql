@@ -149,3 +149,80 @@ VALUES
 (4, 2, 'comment 4'),
 (5, 2, 'comment 5'),
 (6, 3, 'comment 6');
+
+--creating car_catalog
+CREATE DATABASE car_catalog;
+
+--creating tables
+CREATE TABLE body
+(
+	body_id serial PRIMARY KEY,
+	body_name varchar(100)
+);
+
+CREATE TABLE engine
+(
+	engine_id serial PRIMARY KEY,
+	engine_name varchar(100)
+);
+
+CREATE TABLE gearbox
+(
+	gearbox_id serial PRIMARY KEY,
+	gearbox_name varchar(100)
+);
+
+CREATE TABLE car
+(
+	car_id serial PRIMARY KEY,
+	car_name varchar(150),
+	body_id int REFERENCES body(body_id) NOT NULL,
+	engine_id int REFERENCES engine(engine_id) NOT NULL,
+	gearbox_id int REFERENCES gearbox(gearbox_id) NOT NULL
+);
+
+--filling tables
+INSERT INTO engine (engine_name)
+VALUES
+('Бензиновый'),
+('Дизельный'),
+('Ракетный');
+
+INSERT INTO gearbox (gearbox_name)
+VALUES
+('4-ступенчатая'),
+('5-ступенчатая'),
+('6-ступенчатая');
+
+INSERT INTO body (body_name)
+VALUES
+('Седан'),
+('Купе'),
+('Минивен');
+
+INSERT INTO car (car_name, body_id, engine_id, gearbox_id)
+VALUES
+('Nissan Almera', 1, 2, 2),
+('Ferrari F50', 2, 1, 3)
+
+--gets all cars with parts attached to them
+SELECT car_name, body_name, engine_name, gearbox_name FROM car
+JOIN body ON car.body_id = body.body_id
+JOIN engine ON car.engine_id = engine.engine_id
+JOIN gearbox ON car.gearbox_id = gearbox.gearbox_id;
+
+--gets all bodies not attached to cars
+SELECT body_name FROM body b
+LEFT JOIN car c ON b.body_id = c.body_id
+WHERE car_id IS NULL;
+
+--gets all engines not attached to cars
+SELECT engine_name FROM engine e
+LEFT JOIN car c ON c.engine_id = e.engine_id
+WHERE car_id IS NULL;
+
+--gets all gearboxes not attached to cars
+SELECT gearbox_name FROM gearbox g
+LEFT JOIN car c ON c.gearbox_id = g.gearbox_id
+WHERE car_id IS NULL;
+
