@@ -9,11 +9,13 @@ public class CreateActionTest {
 
     @Test
     public void whenItemCreated() {
-        Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[]{"Bug"});
-        new CreateAction().execute(input, tracker);
-        Item result = tracker.findAll().get(0);
-        Item expected = new Item("Bug");
+        Store store = new SqlTracker();
+        store.init();
+        Input input = new StubInput(new String[]{"TestName"});
+        new CreateAction().execute(input, store);
+        Item result = store.findByName("TestName").get(0);
+        Item expected = new Item("TestName");
         assertThat(result.getName(), is(expected.getName()));
+        store.delete(result.getId());
     }
 }

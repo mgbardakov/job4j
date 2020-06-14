@@ -7,9 +7,9 @@ public class DeleteAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store store) {
         String delId = input.askStr("Enter id: ");
-        if (tracker.delete(delId)) {
+        if (store.delete(delId)) {
             System.out.println("Item deleted");
         } else {
             System.out.println("Item not found");

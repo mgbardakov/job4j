@@ -6,13 +6,17 @@ import java.util.function.Consumer;
 
 public class StartUI {
     private final Input input;
-    private final Tracker tracker;
+    private final Store store;
     private final Consumer<String> output;
     private final List<UserAction> actions;
 
-    public StartUI(Input input, Tracker tracker, Consumer<String> output, List<UserAction> actions) {
+    public StartUI(
+            Input input, Store store,
+            Consumer<String> output,
+            List<UserAction> actions
+    ) {
         this.input = input;
-        this.tracker = tracker;
+        this.store = store;
         this.output = output;
         this.actions = actions;
     }
@@ -23,7 +27,7 @@ public class StartUI {
             this.showMenu();
             int select = input.askInt("Select: ", actions.size());
             UserAction action = actions.get(select);
-            run = action.execute(input, tracker);
+            run = action.execute(input, store);
         }
     }
 
@@ -36,7 +40,8 @@ public class StartUI {
 
     public static void main(String[] args) {
         Input input = new ValidateInput(new ConsoleInput());
-        Tracker tracker = new Tracker();
+        Store store = new SqlTracker();
+        store.init();
         List<UserAction> actions = new ArrayList<>();
                 actions.add(new CreateAction());
                 actions.add(new ShowAllAction());
@@ -45,6 +50,6 @@ public class StartUI {
                 actions.add(new FindByIdAction());
                 actions.add(new FindByNameAction());
                 actions.add(new ExitAction());
-        new StartUI(input, tracker, System.out::println, actions).init();
+        new StartUI(input, store, System.out::println, actions).init();
     }
 }
