@@ -1,7 +1,5 @@
 package ru.job4j.tracker;
 import org.junit.Test;
-import ru.job4j.tracker.Item;
-import ru.job4j.tracker.Tracker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,99 +12,126 @@ public class TrackerTest {
 
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
-        Tracker tracker = new Tracker();
+        Store store = new SqlTracker();
+        store.init();
         Item item = new Item("test1");
-        tracker.add(item);
-        Item result = tracker.findById(item.getId());
+        store.add(item);
+        Item result = store.findById(item.getId());
         assertThat(result.getName(), is(item.getName()));
+        store.delete(result.getId());
     }
 
     @Test
     public void trackerAdd() {
         Item testItem = new Item("Сковорода");
-        Tracker testTracker = new Tracker();
-        assertThat(testTracker.add(testItem), is(testItem));
+        Store testStore = new SqlTracker();
+        testStore.init();
+        assertThat(testStore.add(testItem), is(testItem));
+        testStore.delete(testItem.getId());
     }
 
     @Test
     public void trackerFindAll() {
-        Tracker testTracker = new Tracker();
-        Item pan = testTracker.add(new Item("Сковорода"));
-        Item fork = testTracker.add(new Item("Вилка"));
-        Item mug = testTracker.add(new Item("Кружка"));
+        Store testStore = new SqlTracker();
+        testStore.init();
+        Item pan = testStore.add(new Item("Сковорода"));
+        Item fork = testStore.add(new Item("Вилка"));
+        Item mug = testStore.add(new Item("Кружка"));
         List<Item> result = new ArrayList<>();
         result.add(pan);
         result.add(fork);
         result.add(mug);
-        assertThat(testTracker.findAll(), is(result));
+        assertThat(testStore.findAll(), is(result));
+        testStore.delete(pan.getId());
+        testStore.delete(fork.getId());
+        testStore.delete(mug.getId());
     }
 
     @Test
     public void trackerFindByName() {
-        Tracker testTracker = new Tracker();
-        Item mug0 = testTracker.add(new Item("Кружка"));
-        Item pan = testTracker.add(new Item("Сковорода"));
-        Item fork = testTracker.add(new Item("Вилка"));
-        Item mug = testTracker.add(new Item("Кружка"));
+        Store testStore = new SqlTracker();
+        testStore.init();
+        Item mug0 = testStore.add(new Item("Кружка"));
+        Item pan = testStore.add(new Item("Сковорода"));
+        Item fork = testStore.add(new Item("Вилка"));
+        Item mug = testStore.add(new Item("Кружка"));
         List<Item> result = new ArrayList<>();
         result.add(mug0);
         result.add(mug);
-        assertThat(testTracker.findByName("Кружка"), is(result));
+        assertThat(testStore.findByName("Кружка"), is(result));
+        testStore.delete(mug0.getId());
+        testStore.delete(pan.getId());
+        testStore.delete(fork.getId());
+        testStore.delete(mug.getId());
     }
 
     @Test
     public void trackerFindByID() {
-        Tracker testTracker = new Tracker();
-        Item pan = testTracker.add(new Item("Сковорода"));
-        Item fork = testTracker.add(new Item("Вилка"));
-        Item mug = testTracker.add(new Item("Кружка"));
-        assertThat(testTracker.findById(mug.getId()), is(mug));
+        Store testStore = new SqlTracker();
+        testStore.init();
+        Item pan = testStore.add(new Item("Сковорода"));
+        Item fork = testStore.add(new Item("Вилка"));
+        Item mug = testStore.add(new Item("Кружка"));
+        assertThat(testStore.findById(mug.getId()), is(mug));
+        testStore.delete(pan.getId());
+        testStore.delete(fork.getId());
+        testStore.delete(mug.getId());
     }
 
     @Test
     public void trackerFindByIDIfTheresNoOneThenNull() {
-        Tracker testTracker = new Tracker();
-        Item pan = testTracker.add(new Item("Сковорода"));
-        Item fork = testTracker.add(new Item("Вилка"));
-        Item mug = testTracker.add(new Item("Кружка"));
-        assertThat(testTracker.findById("153215462"), nullValue());
+        Store testStore = new SqlTracker();
+        testStore.init();
+        Item pan = testStore.add(new Item("Сковорода"));
+        Item fork = testStore.add(new Item("Вилка"));
+        Item mug = testStore.add(new Item("Кружка"));
+        assertThat(testStore.findById("153215462"), nullValue());
+        testStore.delete(pan.getId());
+        testStore.delete(fork.getId());
+        testStore.delete(mug.getId());
     }
 
     @Test
     public void whenReplace() {
-        Tracker tracker = new Tracker();
+        Store store = new SqlTracker();
+        store.init();
         Item bug = new Item("Bug");
-        tracker.add(bug);
+        store.add(bug);
         String id = bug.getId();
         Item bugWithDesc = new Item("Bug with description");
-        tracker.replace(id, bugWithDesc);
-        assertThat(tracker.findById(id).getName(), is("Bug with description"));
+        store.replace(id, bugWithDesc);
+        assertThat(store.findById(id).getName(), is("Bug with description"));
+        store.delete(bug.getId());
     }
 
     @Test
     public void whenDelete() {
-        Tracker tracker = new Tracker();
+        Store store = new SqlTracker();
+        store.init();
         Item bug = new Item("Bug");
-        tracker.add(bug);
+        store.add(bug);
         String id = bug.getId();
-        tracker.delete(id);
-        assertThat(tracker.findById(id), is(nullValue()));
+        store.delete(id);
+        assertThat(store.findById(id), is(nullValue()));
     }
 
     @Test
     public void whenNoDeleteItem() {
-        Tracker tracker = new Tracker();
+        Store store = new SqlTracker();
+        store.init();
         Item bug = new Item("Bug");
-        tracker.add(bug);
+        store.add(bug);
         String id = "123456789";
-        assertThat(tracker.delete(id), is(false));
+        assertThat(store.delete(id), is(false));
+        store.delete(bug.getId());
     }
 
     @Test
     public void whenNoReplaceItem() {
-        Tracker tracker = new Tracker();
+        Store store = new SqlTracker();
+        store.init();
         String id = "123456789";
         Item bugWithDesc = new Item("Bug with description");
-        assertThat(tracker.replace(id, bugWithDesc), is(false));
+        assertThat(store.replace(id, bugWithDesc), is(false));
     }
 }

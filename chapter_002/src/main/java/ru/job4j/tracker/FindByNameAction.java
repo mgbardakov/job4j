@@ -19,9 +19,9 @@ public class FindByNameAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store store) {
         String findName = input.askStr("Enter name: ");
-        List<Item> similarNames = tracker.findByName(findName);
+        List<Item> similarNames = store.findByName(findName);
         similarNames.stream().map(Item::toString).forEach(con);
         return true;
     }

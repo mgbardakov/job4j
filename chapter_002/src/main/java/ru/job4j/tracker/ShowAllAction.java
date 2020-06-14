@@ -19,8 +19,8 @@ public class ShowAllAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
-        List<Item> itemsToShow = tracker.findAll();
+    public boolean execute(Input input, Store store) {
+        List<Item> itemsToShow = store.findAll();
         itemsToShow.stream().map(Item::toString).forEach(con);
         return true;
     }
