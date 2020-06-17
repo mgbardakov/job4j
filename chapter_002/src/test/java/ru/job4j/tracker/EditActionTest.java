@@ -8,7 +8,7 @@ import static org.junit.Assert.assertThat;
 public class EditActionTest {
     @Test
     public void whenReplaceItem() {
-        Store store = new SqlTracker();
+        Store store = new MemTracker();
         store.init();
         Item item = new Item("new item");
         store.add(item);

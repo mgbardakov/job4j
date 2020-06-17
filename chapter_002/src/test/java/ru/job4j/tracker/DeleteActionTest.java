@@ -6,7 +6,7 @@ public class DeleteActionTest {
 
     @Test
     public void whenDeleteItem() {
-        Store store = new SqlTracker();
+        Store store = new MemTracker();
         store.init();
         Item item = new Item("new item");
         store.add(item);

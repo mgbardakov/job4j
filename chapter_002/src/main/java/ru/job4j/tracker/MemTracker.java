@@ -2,18 +2,28 @@ package ru.job4j.tracker;
 
 import java.util.*;
 
-public class MemTracker {
+public class MemTracker implements Store {
     /**
      * Массив для хранения заявок.
      */
-    private final List<Item> items = new ArrayList<>();
+    private List<Item> items;
 
+
+    @Override
+    public void init() {
+        items = new ArrayList<>();
+    }
+
+    @Override
+    public void close() {
+    }
 
     /**
      * Метод добавления заявки в хранилище
      *
      * @param item новая заявка
      */
+    @Override
     public Item add(Item item) {
         item.setId(generateId());
         items.add(item);
@@ -36,6 +46,7 @@ public class MemTracker {
      * Метод возвращает массив всех объектов
      * @return - массив объектов
      */
+    @Override
     public List<Item> findAll() {
         return items;
     }
@@ -45,6 +56,7 @@ public class MemTracker {
      * @param key - имя
      * @return - массив объектов
      */
+    @Override
     public List<Item> findByName(String key) {
         List<Item> result = new ArrayList<>();
         for (Item item : items) {
@@ -64,6 +76,7 @@ public class MemTracker {
      * @param id - ID
      * @return - найденный объект или null, если объект не найден
      */
+    @Override
     public Item findById(String id) {
         Item result = null;
         for (Item item : items) {
@@ -80,6 +93,7 @@ public class MemTracker {
      * @param id - ID
      * @param  item - объект на который производится замена
      */
+    @Override
     public boolean replace(String id, Item item) {
         int index = indexOf(id);
         if (index == -1) {
@@ -94,6 +108,7 @@ public class MemTracker {
      * Метод удаляет объект
      * @param id - ID
      */
+    @Override
     public boolean delete(String id) {
         int index = indexOf(id);
         if (index == -1) {

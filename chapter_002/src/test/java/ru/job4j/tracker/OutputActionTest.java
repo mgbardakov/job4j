@@ -18,7 +18,7 @@ public class OutputActionTest {
     Item pan;
     Item cake;
     Item pan1;
-    Store store = new SqlTracker();
+    Store store = new MemTracker();
     @Before
     public void doBefore() {
         store.init();

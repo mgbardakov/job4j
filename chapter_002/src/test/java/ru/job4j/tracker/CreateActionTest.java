@@ -9,7 +9,7 @@ public class CreateActionTest {
 
     @Test
     public void whenItemCreated() {
-        Store store = new SqlTracker();
+        Store store = new MemTracker();
         store.init();
         Input input = new StubInput(new String[]{"TestName"});
         new CreateAction().execute(input, store);
