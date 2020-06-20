@@ -7,6 +7,7 @@ import ru.job4j.tracker.StubInput;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.List;
+import java.util.Locale;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -45,13 +46,17 @@ public class OutputCalculateActionTest {
         list.get(5).execute(input, calculator);
         list.get(6).execute(input, calculator);
         list.get(7).execute(input, calculator);
-        assertThat(bos.toString(), is("Sinus of 30.0 degrees is 0,50"
+        assertThat(bos.toString(), is("Sinus of 30.0 degrees is "
+                + String.format(Locale.ROOT, "%.2f", 0.50)
                 + System.lineSeparator()
-                + "Cosinus of 30.0 degrees is 0,87"
+                + "Cosinus of 30.0 degrees is "
+                + String.format(Locale.ROOT, "%.2f", 0.87)
                 + System.lineSeparator()
-                + "Tangens of 30.0 degrees is 0,58"
+                + "Tangens of 30.0 degrees is "
+                + String.format(Locale.ROOT, "%.2f", 0.58)
                 + System.lineSeparator()
-                + "Cotangens of 30.0 degrees is 1,73"
+                + "Cotangens of 30.0 degrees is "
+                + String.format(Locale.ROOT, "%.2f", 1.73)
                 + System.lineSeparator()));
     }
 }

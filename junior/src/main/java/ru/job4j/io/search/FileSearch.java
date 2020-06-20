@@ -5,9 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
@@ -51,7 +49,9 @@ public class FileSearch {
         var condition = getCondition(args);
         PathVisitor visitor = new PathVisitor(condition);
         Files.walkFileTree(Path.of(args.directory()), visitor);
-        return visitor.getFiles();
+        var result = visitor.getFiles();
+        Collections.sort(result);
+        return result;
     }
 
     /**
