@@ -2,7 +2,6 @@ package ru.job4j.tracker;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import usage.UsageLog4j;
 
 import java.io.InputStream;
 import java.sql.*;
@@ -92,14 +91,14 @@ public class SqlTracker implements Store {
     public List<Item> findAll() {
         var rsl = new ArrayList<Item>();
         try (Statement statement = cn.createStatement()) {
-            var resultSet = statement.executeQuery(
-                    "SELECT id, name FROM item"
-            );
-            while (resultSet.next()) {
-                rsl.add(new Item(
-                        resultSet.getString("id"),
-                        resultSet.getString("name"))
-                );
+            try (var resultSet = statement.executeQuery(
+                    "SELECT id, name FROM item")) {
+                while (resultSet.next()) {
+                    rsl.add(new Item(
+                            resultSet.getString("id"),
+                            resultSet.getString("name"))
+                    );
+                }
             }
         } catch (SQLException e) {
             LOG.error("sql error", e);
@@ -113,17 +112,19 @@ public class SqlTracker implements Store {
         try (PreparedStatement statement = cn.prepareStatement(
                 "SELECT id, name FROM item WHERE name = ?")) {
             statement.setString(1, key);
-            var resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                rsl.add(new Item(
-                        resultSet.getString("id"),
-                        resultSet.getString("name"))
-                );
+            try (var resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    rsl.add(new Item(
+                            resultSet.getString("id"),
+                            resultSet.getString("name"))
+                    );
+                }
             }
         } catch (SQLException e) {
             LOG.error("sql error", e);
         }
         return rsl;
+
     }
 
     @Override
