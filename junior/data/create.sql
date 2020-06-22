@@ -226,3 +226,16 @@ SELECT gearbox_name FROM gearbox g
 LEFT JOIN car c ON c.gearbox_id = g.gearbox_id
 WHERE car_id IS NULL;
 
+-- creating aggregator db
+CREATE DATABASE aggregator;
+
+-- creating table
+CREATE TABLE post
+(
+	id serial PRIMARY KEY,
+	name varchar(200),
+	text text,
+	link text UNIQUE,
+	created timestamp
+)
+
