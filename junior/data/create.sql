@@ -239,3 +239,50 @@ CREATE TABLE post
 	created timestamp
 )
 
+-- creating tables
+CREATE TABLE company
+(
+id integer NOT NULL,
+name character varying,
+CONSTRAINT company_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE person
+(
+id integer NOT NULL,
+name character varying,
+company_id integer REFERENCES company (id),
+CONSTRAINT person_pkey PRIMARY KEY (id)
+);
+
+--filling tables
+INSERT INTO company (id, name)
+VALUES
+(1, 'Microsoft'),
+(2, 'Google'),
+(3, 'Yandex'),
+(4, 'Apple'),
+(5, 'Amazon');
+
+INSERT INTO person (id, name, company_id)
+VALUES
+(1, 'Carl', 1),
+(2, 'Clara', 1),
+(3, 'Fred', 2),
+(4, 'George', 3),
+(5, 'Adolf', 3),
+(6, 'Benitto', 5);
+
+--queries
+-- gets all persons not from company #5
+SELECT person.name AS person_name, company.name AS company_name FROM person
+JOIN company ON person.company_id = company.id
+WHERE company_id != 5;
+
+-- name of the company with the maximum number of persons + number of persons in this company
+SELECT company.name, COUNT(*) FROM company
+JOIN person ON person.company_id = company.id
+GROUP BY company.name
+ORDER BY COUNT(*) DESC
+LIMIT 1;
+
