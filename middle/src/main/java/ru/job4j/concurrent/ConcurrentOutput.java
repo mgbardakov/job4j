@@ -1,4 +1,4 @@
-package concurrent;
+package ru.job4j.concurrent;
 
 /**
  * example class for concurrency
