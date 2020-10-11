@@ -9,7 +9,7 @@ public class User {
         this.age = age;
     }
 
-    @Override
+    @SuppressWarnings("deprecation")@Override
     protected void finalize() throws Throwable {
         super.finalize();
         System.out.println("user deleted");
