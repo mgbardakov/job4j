@@ -13,6 +13,7 @@
         <module>chapter_002</module>
         <module>junior</module>
         <module>middle</module>
+        <module>wget</module>
     </modules>
 
     <properties>
