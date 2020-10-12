@@ -8,17 +8,17 @@ package ru.job4j.concurrent;
 public class ThreadState {
     public static void main(String[] args) {
         Thread first = new Thread(
-                () -> {}
+                () -> { }
         );
         Thread second = new Thread(
-                () -> {}
+                () -> { }
         );
         printThreadNameAndState(first);
         printThreadNameAndState(second);
         first.start();
         second.start();
-        while (first.getState() != Thread.State.TERMINATED ||
-                second.getState() != Thread.State.TERMINATED) {
+        while (first.getState() != Thread.State.TERMINATED
+                || second.getState() != Thread.State.TERMINATED) {
             printThreadNameAndState(first);
             printThreadNameAndState(second);
         }
