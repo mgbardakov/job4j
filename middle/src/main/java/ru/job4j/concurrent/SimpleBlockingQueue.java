@@ -29,7 +29,7 @@ public class SimpleBlockingQueue<T> {
     private Queue<T> queue = new LinkedList<>();
 
     public synchronized void offer(T value) {
-        while(queue.size() == bound) {
+        while (queue.size() == bound) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -41,7 +41,7 @@ public class SimpleBlockingQueue<T> {
     }
 
     public synchronized T poll() throws InterruptedException {
-        while(queue.isEmpty()) {
+        while (queue.isEmpty()) {
                 wait();
        }
         var rsl = queue.poll();
