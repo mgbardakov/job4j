@@ -25,7 +25,7 @@ public class FindByIdActionTest {
         PrintStream ps = new PrintStream(bos);
         System.setOut(ps);
         Input input = mock(Input.class);
-        when(input.askStr(any(String.class))).thenReturn(item.getId());
+        when(input.askStr(any(String.class))).thenReturn(String.valueOf(item.getId()));
         new FindByIdAction().execute(input, store);
         System.setOut(con);
         String sep = System.lineSeparator();

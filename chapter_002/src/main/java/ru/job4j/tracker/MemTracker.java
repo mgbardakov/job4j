@@ -25,7 +25,7 @@ public class MemTracker implements Store {
      */
     @Override
     public Item add(Item item) {
-        item.setId(generateId());
+        item.setId(Integer.parseInt(generateId()));
         items.add(item);
         return item;
     }
@@ -39,7 +39,7 @@ public class MemTracker implements Store {
      */
     private String generateId() {
         //Реализовать метод генерации.
-        return String.valueOf(new Date().getTime() + new Random().nextLong());
+        return String.valueOf(new Random().nextInt());
     }
 
     /**
@@ -80,7 +80,7 @@ public class MemTracker implements Store {
     public Item findById(String id) {
         Item result = null;
         for (Item item : items) {
-            if (item.getId().equals(id)) {
+            if (String.valueOf(item.getId()).equals(id)) {
                 result = item;
                 break;
             }
@@ -99,7 +99,7 @@ public class MemTracker implements Store {
         if (index == -1) {
             return false;
         }
-        item.setId(id);
+        item.setId(Integer.parseInt(id));
         items.set(index, item);
         return true;
     }
@@ -125,7 +125,7 @@ public class MemTracker implements Store {
     private int indexOf(String id) {
         int rsl = -1;
         for (int index = 0; index < items.size(); index++) {
-            if (items.get(index).getId().equals(id)) {
+            if (items.get(index).getId() == (Integer.parseInt(id))) {
                 rsl = index;
                 break;
             }

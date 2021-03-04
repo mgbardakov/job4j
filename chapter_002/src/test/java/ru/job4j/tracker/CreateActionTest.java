@@ -16,6 +16,6 @@ public class CreateActionTest {
         Item result = store.findByName("TestName").get(0);
         Item expected = new Item("TestName");
         assertThat(result.getName(), is(expected.getName()));
-        store.delete(result.getId());
+        store.delete(String.valueOf(result.getId()));
     }
 }

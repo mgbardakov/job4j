@@ -38,7 +38,7 @@ public class TrackerTest {
         ) {
             Item item = new Item("test1");
             store.add(item);
-            Item result = store.findById(item.getId());
+            Item result = store.findById(String.valueOf(item.getId()));
             assertThat(result.getName(), is(item.getName()));
         }
     }
@@ -86,7 +86,7 @@ public class TrackerTest {
                 ConnectionRollback.create(this.init()))
         ) {
             Item mug = testStore.add(new Item("Кружка"));
-            assertThat(testStore.findById(mug.getId()), is(mug));
+            assertThat(testStore.findById(String.valueOf(mug.getId())), is(mug));
         }
     }
 
@@ -104,7 +104,7 @@ public class TrackerTest {
         ) {
             Item bug = new Item("Bug");
             store.add(bug);
-            String id = bug.getId();
+            String id = String.valueOf(bug.getId());
             Item bugWithDesc = new Item("Bug with description");
             store.replace(id, bugWithDesc);
             assertThat(store.findById(id).getName(), is("Bug with description"));
@@ -118,7 +118,7 @@ public class TrackerTest {
         ) {
             Item bug = new Item("Bug");
             store.add(bug);
-            String id = bug.getId();
+            String id = String.valueOf(bug.getId());
             store.delete(id);
             assertThat(store.findById(id), is(nullValue()));
         }

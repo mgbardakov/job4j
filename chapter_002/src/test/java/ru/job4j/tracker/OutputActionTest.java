@@ -34,9 +34,9 @@ public class OutputActionTest {
 
     @After
     public void doAfter() {
-        store.delete(pan.getId());
-        store.delete(cake.getId());
-        store.delete(pan1.getId());
+        store.delete(String.valueOf(pan.getId()));
+        store.delete(String.valueOf(cake.getId()));
+        store.delete(String.valueOf(pan1.getId()));
     }
 
 

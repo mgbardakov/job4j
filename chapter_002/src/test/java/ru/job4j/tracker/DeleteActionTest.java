@@ -15,9 +15,9 @@ public class DeleteActionTest {
         store.init();
         Item item = new Item("new item");
         store.add(item);
-        String[] answers = {item.getId()};
+        String[] answers = {String.valueOf(item.getId())};
         new DeleteAction().execute(new StubInput(answers), store);
-        Item deleted = store.findById(item.getId());
+        Item deleted = store.findById(String.valueOf(item.getId()));
         assertNull(deleted);
     }
 
@@ -28,9 +28,9 @@ public class DeleteActionTest {
         Item item = new Item("new item");
         store.add(item);
         Input input = mock(Input.class);
-        when(input.askStr(any(String.class))).thenReturn(item.getId());
+        when(input.askStr(any(String.class))).thenReturn(String.valueOf(item.getId()));
         new DeleteAction().execute(input, store);
-        Item deleted = store.findById(item.getId());
+        Item deleted = store.findById(String.valueOf(item.getId()));
         assertNull(deleted);
     }
 }

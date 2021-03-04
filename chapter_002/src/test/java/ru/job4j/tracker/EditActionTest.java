@@ -16,13 +16,13 @@ public class EditActionTest {
         Item item = new Item("new item");
         store.add(item);
         String[] answers = {
-                item.getId(),
+                String.valueOf(item.getId()),
                 "replaced item"
         };
         new EditAction().execute(new StubInput(answers), store);
-        Item replaced = store.findById(item.getId());
+        Item replaced = store.findById(String.valueOf(item.getId()));
         assertThat(replaced.getName(), is("replaced item"));
-        store.delete(item.getId());
+        store.delete(String.valueOf(item.getId()));
     }
 
     @Test
@@ -32,7 +32,7 @@ public class EditActionTest {
         Item item = new Item("new item");
         store.add(item);
         Input input = mock(Input.class);
-        when(input.askStr(any(String.class))).thenReturn(item.getId(), "replaced item");
+        when(input.askStr(any(String.class))).thenReturn(String.valueOf(item.getId()), "replaced item");
         new EditAction().execute(input, store);
         assertThat(store.findAll().get(0).getName(), is("replaced item"));
     }
