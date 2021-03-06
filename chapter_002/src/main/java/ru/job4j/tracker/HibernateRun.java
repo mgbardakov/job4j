@@ -6,6 +6,8 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 public class HibernateRun {
@@ -26,6 +28,14 @@ public class HibernateRun {
             for (Item it : list) {
                 System.out.println(it);
             }
+            Item biba = Item.of("Biba",
+                    "Boba's brother",
+                    new Timestamp(new Date().getTime()));
+            Item boba = Item.of("Boba",
+                    "Brother of Biba",
+                    new Timestamp(new Date().getTime()));
+            create(biba, sf);
+            create(boba, sf);
         }  catch (Exception e) {
             e.printStackTrace();
         } finally {
