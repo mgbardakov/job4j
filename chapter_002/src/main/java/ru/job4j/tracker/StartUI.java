@@ -40,7 +40,7 @@ public class StartUI {
 
     public static void main(String[] args) {
         Input input = new ValidateInput(new ConsoleInput());
-        Store store = new SqlTracker();
+        Store store = new HbmTracker();
         store.init();
         List<UserAction> actions = new ArrayList<>();
                 actions.add(new CreateAction());
