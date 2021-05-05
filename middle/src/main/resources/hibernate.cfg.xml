@@ -17,7 +17,9 @@
         <property name="format_sql">true</property>
         <property name="use_sql_comments">true</property>
 
-        <mapping class="ru.job4j.hibernate.model.car.CarBrand" />
-        <mapping class="ru.job4j.hibernate.model.car.CarModel" />
+        <mapping class="ru.job4j.hibernate.car.model.car.CarBrand" />
+        <mapping class="ru.job4j.hibernate.car.model.car.CarModel" />
+        <mapping class="ru.job4j.hibernate.library.model.Author" />
+        <mapping class="ru.job4j.hibernate.library.model.Book" />
     </session-factory>
 </hibernate-configuration>

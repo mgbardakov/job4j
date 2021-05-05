@@ -1,11 +1,11 @@
-package ru.job4j.hibernate.runtime;
+package ru.job4j.hibernate.car.runtime;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import ru.job4j.hibernate.model.car.CarBrand;
-import ru.job4j.hibernate.model.car.CarModel;
+import ru.job4j.hibernate.car.model.car.CarBrand;
+import ru.job4j.hibernate.car.model.car.CarModel;
 
 
 public class HbmRun {
