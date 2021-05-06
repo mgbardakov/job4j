@@ -12,7 +12,8 @@ import java.util.function.Consumer;
 
 public class HbmRun {
 
-    protected static final SessionFactory SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
+    protected static final SessionFactory SESSION_FACTORY = new Configuration()
+            .configure().buildSessionFactory();
 
     public static void main(String[] args) {
 
