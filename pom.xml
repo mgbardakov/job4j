@@ -14,6 +14,7 @@
         <module>junior</module>
         <module>middle</module>
         <module>wget</module>
+        <module>cars</module>
     </modules>
 
     <properties>
