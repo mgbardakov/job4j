@@ -15,6 +15,7 @@
         <module>middle</module>
         <module>wget</module>
         <module>cars</module>
+        <module>hql</module>
     </modules>
 
     <properties>
