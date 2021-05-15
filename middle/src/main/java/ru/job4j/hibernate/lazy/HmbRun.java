@@ -56,7 +56,7 @@ public class HmbRun {
         final Transaction transaction = session.beginTransaction();
         try {
             rslList = session.createQuery(
-                    "select distinct c from CarBrand c join fetch c.carModels"
+                    "select c from CarBrand c left join fetch c.carModels"
             ).list();
             transaction.commit();
         } catch (final Exception e) {

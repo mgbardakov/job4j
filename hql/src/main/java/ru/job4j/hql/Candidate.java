@@ -1,9 +1,6 @@
 package ru.job4j.hql;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -14,6 +11,9 @@ public class Candidate {
     private String name;
     private int experience;
     private double salary;
+    @OneToOne
+    @JoinColumn(name = "vacancy_base_id")
+    private VacancyBase vacancyBase;
 
     public Candidate() {
     }
@@ -22,6 +22,13 @@ public class Candidate {
         this.name = name;
         this.experience = experience;
         this.salary = salary;
+    }
+
+    public Candidate(String name, int experience, double salary, VacancyBase vacancyBase) {
+        this.name = name;
+        this.experience = experience;
+        this.salary = salary;
+        this.vacancyBase = vacancyBase;
     }
 
     public int getId() {
@@ -56,6 +63,14 @@ public class Candidate {
         this.salary = salary;
     }
 
+    public VacancyBase getVacancyBase() {
+        return vacancyBase;
+    }
+
+    public void setVacancyBase(VacancyBase vacancyBase) {
+        this.vacancyBase = vacancyBase;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -76,6 +91,7 @@ public class Candidate {
                 ", name='" + name + '\'' +
                 ", experience=" + experience +
                 ", salary=" + salary +
+                ", vacancyBase=" + vacancyBase +
                 '}';
     }
 }

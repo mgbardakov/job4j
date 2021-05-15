@@ -39,9 +39,15 @@ public class HbmRun {
     private static void loadData(SessionFactory sf) {
         var session = sf.openSession();
         session.beginTransaction();
-        session.persist(new Candidate("Jim", 2, 1500));
-        session.persist(new Candidate("John", 3, 2000));
-        session.persist(new Candidate("James", 4, 2500));
+        var vacList = List.of(new Vacancy("Junior Java Developer"),
+                                           new Vacancy("Middle C# developer"),
+                                            new Vacancy("Janitor"));
+        var vacBase = new VacancyBase("hh.ru");
+        vacList.forEach(vacBase::addVacancy);
+        session.persist(vacBase);
+        session.persist(new Candidate("Jim", 2, 1500, vacBase));
+        session.persist(new Candidate("John", 3, 2000, vacBase));
+        session.persist(new Candidate("James", 4, 2500, vacBase));
         session.getTransaction().commit();
         session.close();
     }
@@ -49,7 +55,8 @@ public class HbmRun {
     private static Candidate findById(Candidate candidate, SessionFactory sf) {
         var session = sf.openSession();
         session.beginTransaction();
-        var rsl = session.createQuery("from Candidate c where c.id = :fId")
+        var rsl = session.createQuery("from Candidate c join fetch c.vacancyBase b" +
+                " join fetch b.vacancyList where c.id = :fId")
                 .setParameter("fId", candidate.getId()).uniqueResult();
         session.getTransaction().commit();
         session.close();
@@ -82,10 +89,12 @@ public class HbmRun {
     private static List<Candidate> findAll(SessionFactory sf) {
         var session = sf.openSession();
         session.beginTransaction();
-        var rsl = session.createQuery("from Candidate").list();
+        var rslList = session.createQuery(
+                "select distinct c from Candidate c join fetch c.vacancyBase b" +
+                        " join fetch b.vacancyList", Candidate.class).list();
         session.getTransaction().commit();
         session.close();
-        return rsl;
+        return rslList;
     }
 
 }
