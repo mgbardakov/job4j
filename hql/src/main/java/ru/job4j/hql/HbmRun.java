@@ -55,8 +55,8 @@ public class HbmRun {
     private static Candidate findById(Candidate candidate, SessionFactory sf) {
         var session = sf.openSession();
         session.beginTransaction();
-        var rsl = session.createQuery("from Candidate c join fetch c.vacancyBase b" +
-                " join fetch b.vacancyList where c.id = :fId")
+        var rsl = session.createQuery("from Candidate c join fetch c.vacancyBase b"
+                + " join fetch b.vacancyList where c.id = :fId")
                 .setParameter("fId", candidate.getId()).uniqueResult();
         session.getTransaction().commit();
         session.close();
@@ -66,8 +66,8 @@ public class HbmRun {
     private static void updateCandidate(Candidate candidate, SessionFactory sf) {
         var session = sf.openSession();
         session.beginTransaction();
-        session.createQuery("update Candidate c set c.experience = :fExp," +
-                " c.name = :fName, c.salary = :fSalary where c.id = :fId")
+        session.createQuery("update Candidate c set c.experience = :fExp,"
+                + " c.name = :fName, c.salary = :fSalary where c.id = :fId")
                 .setParameter("fId", candidate.getId())
                 .setParameter("fExp", candidate.getExperience())
                 .setParameter("fName", candidate.getName())
@@ -90,8 +90,8 @@ public class HbmRun {
         var session = sf.openSession();
         session.beginTransaction();
         var rslList = session.createQuery(
-                "select distinct c from Candidate c join fetch c.vacancyBase b" +
-                        " join fetch b.vacancyList", Candidate.class).list();
+                "select distinct c from Candidate c join fetch c.vacancyBase b"
+                        + " join fetch b.vacancyList", Candidate.class).list();
         session.getTransaction().commit();
         session.close();
         return rslList;

@@ -49,8 +49,12 @@ public class CarModel {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         CarModel carModel = (CarModel) o;
         return id == carModel.id;
     }
@@ -62,9 +66,8 @@ public class CarModel {
 
     @Override
     public String toString() {
-        return "CarModel{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return "CarModel{"
+                + "id=" + id
+                + ", name='" + name + '\'' + '}';
     }
 }

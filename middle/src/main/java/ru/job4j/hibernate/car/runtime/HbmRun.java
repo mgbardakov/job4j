@@ -23,7 +23,7 @@ public class HbmRun {
             nissan.addCarModel(new CarModel("Terrano"));
             nissan.addCarModel(new CarModel("Qashqai"));
             nissan.addCarModel(new CarModel("Murano"));
-            nissan.addCarModel( new CarModel("X-Trail"));
+            nissan.addCarModel(new CarModel("X-Trail"));
             session.save(nissan);
             session.getTransaction().commit();
             session.close();

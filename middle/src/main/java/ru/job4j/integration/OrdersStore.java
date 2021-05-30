@@ -80,9 +80,9 @@ public class OrdersStore {
 
     public void updateOrder(Order order) {
         try (Connection con = pool.getConnection();
-             PreparedStatement pr = con.prepareStatement("UPDATE orders" +
-                     " SET name = ?, description = ?, created = ?" +
-                     " WHERE id = ?")) {
+             PreparedStatement pr = con.prepareStatement("UPDATE orders"
+                     + " SET name = ?, description = ?, created = ?"
+                     + " WHERE id = ?")) {
             pr.setString(1, order.getName());
             pr.setString(2, order.getDescription());
             pr.setTimestamp(3, order.getCreated());

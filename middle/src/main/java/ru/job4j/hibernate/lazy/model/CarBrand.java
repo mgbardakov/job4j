@@ -53,8 +53,12 @@ public class CarBrand {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         CarBrand carBrand = (CarBrand) o;
         return id == carBrand.id;
     }
@@ -66,10 +70,9 @@ public class CarBrand {
 
     @Override
     public String toString() {
-        return "CarBrand{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", carModels=" + carModels +
-                '}';
+        return "CarBrand{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", carModels=" + carModels + '}';
     }
 }
