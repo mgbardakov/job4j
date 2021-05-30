@@ -25,6 +25,12 @@ public class Item {
         this.name = name;
     }
 
+    public Item(String name, String description) {
+        this.name = name;
+        this.description = description;
+        created = new Timestamp(System.currentTimeMillis());
+    }
+
     public static Item of(String name, String description, Timestamp created) {
         var item = new Item();
         item.setName(name);
